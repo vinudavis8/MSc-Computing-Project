@@ -1,0 +1,68 @@
+﻿@model IPagedList<Models.Job>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+@{
+    ViewData["Title"] = "Jobs";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h4 class="text-center">Jobs</h4>
+<div class="container">
+    <div class="pagination-container">
+        @Html.PagedListPager(Model, page => Url.Action("Users", new { page }))
+    </div>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+
+                <th>
+                    Title
+                </th>
+                <th>
+                    Budget
+                </th>
+                <th>
+                    SkillTags
+                </th>
+                <th>
+                    JobType
+                </th>
+                <th>
+                    Deadline
+                </th>
+                <th>
+                    DatePosted
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Budget)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SkillTags)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Deadline)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DatePosted)
+                    </td>
+                    <td>
+                        <a href="#">Edit </a> |
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

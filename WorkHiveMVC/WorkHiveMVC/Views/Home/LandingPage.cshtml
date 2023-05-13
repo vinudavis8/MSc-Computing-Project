@@ -1,0 +1,234 @@
+﻿@using Models.ViewModel;
+@model VMDashboard
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var jobs = Model.RecentJobs;
+    var categories = Model.PopularCategories;
+    var freelancers = Model.PopularFreelancers;
+}
+<link href="~/css/landingpage.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/WorkHiveMVC.styles.css" asp-append-version="true" />
+<style>
+    header {
+        position: absolute !important;
+        z-index: 100;
+        width: 100%;
+        background-color: transparent !important;
+    }
+</style>
+<section id="hero-area" class="parallax-search overlay" data-stellar-background-ratio="0.5">
+    <div class="hero-main" id="heading">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="hero-inner">
+                        <!-- Welcome Text -->
+                        <div class="welcome-text">
+                            <h1 class="mb-2">
+                                Join our team and work on exciting projects while
+                                enjoying the freedom of a flexible schedule
+                            </h1>
+                        </div>
+                        <div class="trip-search">
+                            <div class="col-md-4">
+                                <input type="text" id="searchTitle" class="form-control" placeholder="Job title or keywords" value="">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="searchLocation" class="form-control" placeholder="Location" value="">
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-success theme-color" onclick="searchJob()">
+                                    <i class="fas fa-search"></i>
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row app-download">
+                        <div class="apps-image">
+                            <a href="#" class="mr-3"><img class="apps-image-ios" src="~/images/appstore.png" alt=""></a>
+                            <a href="#"><img class="apps-image-android" src="~/images/ggogleplay.png" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="popular-job">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="sec-title">
+                    <h2>Popular Job Categories</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row popular-category">
+            @foreach (var item in Model.PopularCategories)
+            {
+                <div class=" col-md-4">
+                    <a href="#" onclick="searchJobByCategory('@item.CategoryName')">
+                        <div class="popular-job-item">
+                            <i class="fas fa-laptop-code"></i>
+                            <h5>@item.CategoryName</h5>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<section class="info-help">
+    <div class="container">
+        <div class="row info-head">
+            <div class="col-lg-6 col-md-8 col-xs-8">
+                <div class="info-text">
+                    <h3>Empowering freelancers and businesses to succeed togethe...</h3>
+                    <p>
+                        Join our community of freelancers and businesses and start collaborating on your next project today. Our platform offers a secure and reliable way to connect with top talent from around the world, so you can get
+                        your work done on time and within budget.
+                    </p>
+                    <div class="inf-btn pro">
+                        <a href="" class="btn btn-pro btn-secondary btn-lg">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-3"></div>
+        </div>
+    </div>
+</section>
+
+<section class="featured-job">
+    <div class="block">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="head-project">
+                        <div class="section-title see-all">
+                            <h2 class="pl-0">Featured Jobs</h2>
+                        </div>
+                        <div class="see">
+                            <a href="/Jobs/JobSearch?searchLocation=&searchTitle=" class="pr-2">See all Jobs<i class="fas fa-long-arrow-alt-right ml-2"></i></a>
+                        </div>
+                    </div>
+                    <!-- Heading -->
+                    <div class="featured-job-list">
+                        <!-- Job -->
+                        @foreach (var item in Model.RecentJobs)
+                        {
+                            <div class="job-listing">
+                                <div class="job-title-sec home">
+                                    <div class="job-listing-footer">
+                                        @*                                        <div class="c-logo"> <img src="images/company1.png" alt=""> </div>
+                                    *@                                        <h3>
+                                            @Html.ActionLink(item.Title,"JobDetails","Jobs",new { jobId = item.JobId }, null)
+                                        </h3>
+                                        <ul>
+                                            <li><i class="fas fa-building"></i> @item.JobType</li>
+                                            <li><i class="far fa-map"></i> @item.Location</li>
+                                            @*                                            <li><i class="far fa-calendar-check"></i> Full Time</li>
+                                        *@
+                                            <li><i class="fas fa-clock"></i> @item.Deadline.ToString("dd/MM/yyyy")</li>
+                                        </ul>
+                                    </div>
+                                    <div class="the-heart">
+                                        <span class="fav-job"><i class="far fa-heart"></i></span>
+                                        @Html.ActionLink("Apply Now","JobDetails","Jobs",new { jobId = item.JobId }, null)
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="freelancers">
+    <div class="container">
+        <div class="head-project">
+            <div class="section-title see-all">
+                <h2 class="pl-3">Top Freelancers</h2>
+            </div>
+        </div>
+        <div class="col-xl-12">
+            <div class="slick-lancers slick-initialized slick-slider slick-dotted">
+                <!-- Freelancer -->
+                <div class="slick-list draggable">
+                    <div class="slick-track" style="opacity: 1; width: 2160px; transform: translate3d(0px, 0px, 0px);">
+                        @foreach (var item in Model.PopularFreelancers)
+                        {
+                            <div class="agents-grid slick-slide slick-current slick-active" data-slick-index="0" aria-hidden="false" style="width: 330px;" tabindex="0" role="tabpanel" id="slick-slide00" aria-describedby="slick-slide-control00">
+                                <div class="agent-call"><a href="#" tabindex="0"><i class="fas fa-medal"></i></a></div>
+                                <div class="agents-grid-wrap">
+                                    <div class="fr-grid-thumb">
+                                        <a href="candidate-profile.html" tabindex="0">
+                                            <div class="overall-rate"><i class="fas fa-check"></i></div>
+                                            @{
+                                                if (!string.IsNullOrEmpty(item.ProfileImage))
+                                                {
+                                                    <img src="data:image/png;base64,@item.ProfileImage" class="img-fluid mx-auto" alt="">
+                                                }
+                                                else
+                                                {
+                                                    <img src="images/noimage.jpg" class="img-fluid mx-auto" alt="">
+
+                                                }
+                                            }
+                                        </a>
+                                    </div>
+                                    <div class="fr-grid-deatil">
+                                        <h3 class="fr-can-name">
+                                            <a href="candidate-profile.html" tabindex="0">
+                                                @item.UserName
+                                                <img src="images/freelancers/fr.png" alt="" class="ml-2">
+                                            </a>
+                                        </h3>
+                                        <span class="fr-position">todo</span>
+                                    </div>
+                                    <ul class="starts text-center">
+                                        @{
+
+                                            int rating = item.Profile.Rating != null ? (int)item.Profile.Rating : 0;
+                                        }
+
+                                        @for (int i = rating; i > 0; i--)
+                                        {
+                                            <li>
+                                                <i class="fa fa-star checked"></i>
+                                            </li>
+                                        }
+                                        @for (int i = 5 - rating; i > 0; i--)
+                                        {
+                                            <li>
+                                                <i class="fa fa-star unchecked"></i>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                                <div class="fr-grid-info">
+                                    <ul>
+                                        <li>Location<span>@item.Location</span></li>
+                                        <li>Hourly Rate<span>£@item.Profile.HourlyRate / hr</span></li>
+                                        @*                                        <li>Job Success<span>95%</span></li>
+                                    *@
+                                    </ul>
+                                </div>
+                                <div class="fr-grid-footer">
+
+                                    @Html.ActionLink("View Profile","Profile","Freelancer",new { userId = item.Id }, null)
+                                    <span class="fas fa-long-arrow-alt-right ml-2"></span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

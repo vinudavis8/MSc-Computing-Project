@@ -1,0 +1,61 @@
+﻿@model IPagedList<Models.User>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+
+@{
+    ViewData["Title"] = "Users";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h4 class="text-center">Users</h4>
+<div class="container">
+    <div class="pagination-container">
+        @Html.PagedListPager(Model, page => Url.Action("Users", new { page }))
+    </div>
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+
+                <th>
+                    Name
+                </th>
+                <th>
+                    Phone
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Location
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+
+                        <a href="#">Edit </a> |
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

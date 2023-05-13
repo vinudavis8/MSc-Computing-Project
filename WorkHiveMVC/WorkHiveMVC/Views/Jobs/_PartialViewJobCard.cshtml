@@ -1,0 +1,41 @@
+﻿@model IPagedList<Models.Job>
+@using X.PagedList;
+@using X.PagedList.Mvc.Core;
+
+
+<div class="pagination-container">
+    @Html.PagedListPager(Model, page => Url.Action("Users", new { page }))
+</div>
+<br />
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="job-card col-md-3">
+            <div class="col-md-12">
+                <h4 id="job-name" class="text-info font-weight-bold">
+                    @Html.DisplayFor(modelItem => item.Title)
+                </h4>
+                <span class="badge bg-secondary text-white">
+                    @*            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                *@
+                </span>
+                <br />
+                <i class="fa-regular fa-calendar-days"></i>
+                <span class="job-days">@item.Deadline.ToString("dd/MM/yyyy")</span>
+                <span class="job-recruiter">
+                    @*            @Html.DisplayFor(modelItem => item.Client.Name)
+                *@
+                </span><br />
+                <i class="fa-solid fa-sterling-sign"></i>  @Html.DisplayFor(modelItem => item.Budget)
+                <br />
+                <i class="fa-solid fa-location-dot"></i>         @Html.DisplayFor(modelItem => item.Location)
+                <br />
+                <br />
+                @Html.ActionLink("View Details","JobDetails",new { jobId = item.JobId }, null)
+            </div>
+        </div>
+
+    }
+
+</div>

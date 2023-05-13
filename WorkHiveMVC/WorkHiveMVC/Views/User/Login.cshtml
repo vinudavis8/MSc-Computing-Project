@@ -1,0 +1,28 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="myModalLogin" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <img class="login-img" src="~/images/login-img.png" />
+                <div class="row">
+                    <div class="col-md-1"> </div>
+                    <div class="col-md-10">
+                        <div class="form-group login-items">
+                            <i class="fa fa-user login-icon"></i> <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                        </div>
+                        <span id="errorUsername" style="display:none" class="text-danger">Please enter username</span>
+                        <div class="form-group login-items">
+                            <i class="fa fa-eye login-icon"></i>
+                            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
+                        </div>
+                        <span id="errorPassword" style="display:none" class="text-danger">Please enter password</span>
+                        <a class="forgot-password" href="/User/ForgotPassword">forgot your password?</a><br /><br />
+                        <button type="submit" class="btn theme-color col-md-12" onclick="login()">Submit</button>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

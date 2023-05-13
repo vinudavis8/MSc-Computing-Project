@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WorkHiveMobileApp.MainPage"
+             xmlns:viewmodel="clr-namespace:WorkHiveMobileApp.ViewModel"
+             x:DataType="viewmodel:JobsViewModel">
+<!--this view is bind with 'JobsViewModel' in 'ViewModel' folder-->
+    <ScrollView IsVisible="true">
+        <CollectionView x:Name="collectionView" ItemsSource="{Binding JobList}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate  x:DataType="viewmodel:Jobs" >
+                    <Frame   Margin="10,10">
+                        <Frame.GestureRecognizers>
+                            <!--for navigating to job details page"-->
+                            <TapGestureRecognizer 
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:JobsViewModel}},Path=TapCommand}"
+                                    CommandParameter="{Binding JobId}"/>
+                        </Frame.GestureRecognizers>
+                        <StackLayout>
+                            <Label Text="{Binding Title}" 
+                             FontSize="25" 
+                             FontAttributes="Bold" 
+                             TextColor="Black"/>
+                            <Label 
+                              Text="{Binding Location}"
+                              FontAttributes="Bold" />
+                            <Label FontAttributes="Bold">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="£" FontAttributes="Bold" BackgroundColor="LightGray" TextColor="White"></Span>
+                                        <Span Text="{Binding Budget}" FontAttributes="Bold" BackgroundColor="LightGray" TextColor="White" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label 
+                              Text="{Binding JobType}"
+                              FontAttributes="Italic"
+                              VerticalOptions="End" />
+                            <Label 
+                              Text="{Binding Deadline}"
+                              FontAttributes="Italic"
+                              VerticalOptions="End" />
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
+</ContentPage>

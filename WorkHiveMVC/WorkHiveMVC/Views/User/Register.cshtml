@@ -1,0 +1,50 @@
+﻿ <!-- Modal -->
+<div class="modal fade" id="myModalRegister" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="email">Register as:</label>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="radio1" name="userTypeRadio" value="Freelancer" checked><span>Freelancer</span>
+                        <br />
+                        <input type="radio" class="form-check-input" id="radio2" name="userTypeRadio" value="Client"><span>Client</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Name:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+                    <span id="errorName" style="display:none" class="text-danger">Please enter name</span>
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Phone:</label>
+                    <input type="text" class="form-control" id="phone" placeholder="Enter phone" name="phone">
+                    <span id="errorPhone" style="display:none" class="text-danger">Please enter phone</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" onChange="CheckIfEmailExists()" id="regEmail" placeholder="Enter email" name="email">
+                    <span id="errorEmail" style="display:none" class="text-danger">Please enter email</span>
+                    <span id="errorEmailExist" style="display:none" class="text-danger">email already exist</span>
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" id="regPassword" placeholder="Enter password" name="password">
+                    <span id="errorPassword" style="display:none" class="text-danger">Please enter password</span>
+                </div>
+                <div class="form-group">
+                    <label for="email">Location:</label>
+                    <input type="text" class="form-control" id="location" placeholder="Enter location" name="location">
+                    <span id="errorLocation" style="display:none" class="text-danger">Please enter location</span>
+                </div>
+                <button type="button" id="btnRegister" class="btn btn-primary" onclick="register()">Register</button>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>

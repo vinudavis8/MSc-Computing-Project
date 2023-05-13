@@ -1,0 +1,102 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor Accessor
+@{
+    var loggedInUserType = Accessor.HttpContext.Session.GetString("loggedInUserType");
+    var loggedInUserName = Accessor.HttpContext.Session.GetString("loggedInUserName");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - WorkHiveMVC</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WorkHiveMVC.styles.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/8ec6cfe396.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/script.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm  ">
+            <a class="navbar-brand" href="/Home/Index">
+                <img src="~/images/workhivelogo.png" style="width:40px;" alt="Logo" class="brand-image img-rectangle elevation-3" style="opacity: .8">
+            </a>
+            <div class="collapse navbar-collapse" id="mynavbar">
+                @if (loggedInUserType == "Freelancer")
+                {
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Freelancer/Profile">My Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Freelancer/ViewProposals">My Bids</a>
+                        </li>
+                    </ul>
+                }
+                else if (loggedInUserType == "Client")
+                {
+                    <ul class="navbar-nav">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Client/Myjobs">My Jobs</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Client/Bids"> Bids</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Client/EditProfile"> My Profile</a>
+                        </li>
+                    </ul>
+                }
+            </div>
+            <form class="d-flex ">
+                @if (!string.IsNullOrEmpty(loggedInUserName))
+                {
+                    <input type="hidden" value="@loggedInUserType" id="login-user-type" />
+                    <input type="hidden" value="true" id="login-status" />
+                    <p>Welcome @loggedInUserName </p>
+                    <a href="/User/Logout" class="link-nav btn btn-info ">
+                        <i class="fas fa-user-circle"></i> Logout
+                    </a>
+                }
+                else
+                {
+                    <a href="#" class="link-nav btn btn-success theme-color" data-toggle="modal" data-target="#myModalLogin">
+                        <i class="fas fa-user-circle"></i> Login
+                    </a>
+                    <a href="#" class="link-nav btn btn-success theme-color" data-toggle="modal" data-target="#myModalRegister">
+                        <i class="fas fa-user-plus"></i>
+                        Register
+                    </a>
+                }
+            </form>
+        </nav>
+    </header>
+    <div class="container-landing">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <div id="loader" style="display:none"></div>
+    <footer class="border-top footer text-muted">
+        <div class="container text-center">
+            &copy; 2023 - WorkHiveMVC
+        </div>
+    </footer>
+
+    @{
+        Html.RenderPartial("~/Views/User/Login.cshtml");
+        Html.RenderPartial("~/Views/User/Register.cshtml");
+    }
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

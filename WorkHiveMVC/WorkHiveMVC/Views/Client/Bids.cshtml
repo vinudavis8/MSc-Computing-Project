@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Models.ViewModel.BidsViewModel>
+
+@{
+    ViewData["Title"] = "ViewProposals";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h4 class="text-center"> Bids</h4>
+<hr />
+<br />
+<br />
+<div class="container">
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    Freelancer
+                </th>
+                <th>
+                    Job
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BidAmount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ExpectedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @Html.ActionLink(item.FreelancerName, "Profile", "Freelancer",new { userId = item.FreelancerId }, htmlAttributes:null )
+                    </th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BidAmount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ExpectedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @if (item.Status.Trim() == "Pending")
+                        {
+                            <input type="button" class="btn btn-success" onclick="ConfirmAcceptProposal(@item.BidId)" value="Accept" />
+                        }
+
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

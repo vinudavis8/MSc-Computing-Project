@@ -1,0 +1,69 @@
+﻿@model Models.Job
+
+@{
+    ViewData["Title"] = "EditJob";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string description = Model != null ? Model.Description : "";
+}
+
+<h3 class="text-center">EditJob</h3>
+<hr />
+<form asp-action="EditJob" method="POST">
+
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input asp-for="JobId" class="form-control" type="hidden" />
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                @Html.TextAreaFor(model => model.Description,new { @class = "form-control",rows=6})
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="Budget" class="control-label"></label>
+                <input asp-for="Budget" class="form-control" />
+                <span asp-validation-for="Budget" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SkillTags" class="control-label"></label>
+
+                <input asp-for="SkillTags" class="form-control" />
+                <span asp-validation-for="SkillTags" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JobType" class="control-label"></label>
+                <input asp-for="JobType" class="form-control" />
+                <span asp-validation-for="JobType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Deadline" class="control-label"></label>
+                <input asp-for="Deadline" class="form-control" />
+                <span asp-validation-for="Deadline" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-5"></div>
+        <div class="col-md-2">
+            <input type="submit" value="Save" class="btn btn-primary theme-color col-md-12" />
+        </div>
+        <div class="col-md-5"></div>
+    </div>
+    <h5 class="text-success text-center"> @ViewBag.message</h5>
+</form>
+
+

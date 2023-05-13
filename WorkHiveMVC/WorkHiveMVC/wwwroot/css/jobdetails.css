@@ -1,0 +1,61 @@
+﻿span.category-tag {
+    font-size: 14px;
+    color: #fff;
+    font-weight: 500;
+    background: #2a41e8;
+    border: 1px solid #2a41e8;
+    padding: 5px 15px;
+    border-radius: 50px;
+    top: -3px;
+    margin-left: 0.8rem;
+    position: relative;
+}
+
+
+.widget_author__avatar {
+    border-radius: 50%;
+    /*    margin-right: 30px;
+*/ float: left;
+}
+
+.box {
+    width: 100%;
+    display: block;
+    background: #fff;
+    margin-bottom: 30px;
+    border: 1px solid #eaeff5;
+    -webkit-box-shadow: 0 0 10px 1px rgb(71 85 95 / 8%);
+    box-shadow: 0 0 10px 1px rgb(71 85 95 / 8%);
+    padding: 30px;
+}
+
+.side-list ul li {
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #666;
+    list-style: none;
+    padding: 30px 5px;
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px dashed #eaeff5;
+}
+
+.widget-boxed-header {
+    padding-bottom: 0px;
+    padding-top: 0px;
+    border-bottom: 1px solid #eaeff5;
+}
+
+.side-list ul li span {
+    float: right;
+    color: #333;
+    font-family: 'Nunito', sans-serif;
+    font-size: 14px;
+    /*font-weight: 700;*/
+}
+
+#myModalproposal {
+    margin-top: 150px;
+    height: 500px !important;
+}

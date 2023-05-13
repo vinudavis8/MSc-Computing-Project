@@ -1,0 +1,123 @@
+﻿@model Models.Job
+<link href="~/css/jobdetails.css" rel="stylesheet" />
+
+
+@Html.HiddenFor(model => model.JobId)
+
+<nav aria-label="breadcrumb" class="main-breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            @Html.ActionLink("Back to Search", "JobSearch")
+        </li>
+    </ol>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <div class="box">
+                <div class="detail-wrapper-body">
+                    <div class="row">
+                        <div class="listing-title-bar col-md-10">
+                            <h2>
+                                @Html.DisplayFor(model => model.Title)
+                            </h2>
+                            <span class="mrg-l-5 category-tag">
+                                @Model.JobType
+                            </span>
+                        </div>
+
+                    </div>
+                    <div class="san mt-33">
+                        <a href="#listing-location" class="listing-address">
+                            <i class="fa fa-map-marker pr-2 ti-location-pin mrg-r-5"></i>
+                            @Html.DisplayFor(model => model.Location)
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <h3>Job Description</h3>
+                <p class="mb-3">
+                    @Html.DisplayFor(model => model.Description)
+                </p>
+
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="side-list box">
+                <div class="widget-boxed-header">
+                    <h3><i class="fas fa-business-time pr-3"></i>Job Summary</h3>
+                </div>
+                <div class="widget-boxed-body pt-0">
+                    <ul>
+                        <li class="pt-0">
+                            <i class="fas fa-dollar-sign pr-3"></i>Offerd Salary <span>
+                                $@Html.DisplayFor(model => model.Budget)
+                            </span>
+                        </li>
+                        <li class="pt-0">
+                            <i class="fas fa-briefcase pr-3"></i>Experience <span>
+                                2 Years
+                            </span>
+                        </li>
+                        <li class="pt-0">
+                            <i class="fas fa-clock pr-3"></i>Date Posted <span>
+                                @Html.DisplayFor(model => model.DatePosted)
+                            </span>
+                        </li>
+                        <li class="pt-0">
+                            <i class="fas fa-clock pr-3"></i>Deadline <span>
+                                @Html.DisplayFor(model => model.Deadline)
+                            </span>
+                        </li>
+                        <li class="pt-0">
+                            <i class="fas fa-clock pr-3"></i>Skills <span>
+                                @Html.DisplayFor(model => model.SkillTags)
+                            </span>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <input type="button" onclick="OpenBidPopup()" class="btn btn-success" value="Submit Bid" />
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal " id="myModalproposal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                Bid Amount
+                <input type="number" id="bidAmount" class="form-control" placeholder="Bid Amount" />
+                This project will be delivered in
+                <input type="date" id="days" class="form-control" placeholder="Days" />
+                Description
+                <textarea class="form-control" id="description"></textarea>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="saveBid()">Save</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+
+</script>
+<script src="~/js/jobs.js"></script>
+
+
+
+
+

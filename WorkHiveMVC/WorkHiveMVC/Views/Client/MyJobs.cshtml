@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Models.Job>
+
+@{
+    string message = ViewData["message"] != null ? ViewData["message"].ToString():"";
+    ViewData["Title"] = "MyJobs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+<h4 class="text-center"> My Jobs</h4>
+<hr />
+<br />
+<br />
+<h5 class="text-success text-center"> @message</h5>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+        </div>
+        <div class="col-sm-6">
+            <div class="float-right">
+                <a class="btn btn-success" href="/Client/CreateJob">Create Job</a>
+            </div>
+        </div>
+    </div><br />
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.Budget)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SkillTags)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.JobType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Deadline)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DatePosted)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Budget)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SkillTags)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.JobType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Deadline)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DatePosted)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "EditJob", new { jobId=item.JobId }) |
+                        @Html.ActionLink("Delete", "DeleteJob", new { jobId=item.JobId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

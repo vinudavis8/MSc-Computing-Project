@@ -1,0 +1,65 @@
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@{
+    ViewData["Title"] = "JobSearch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<link href="~/css/jobs.css" rel="stylesheet" />
+<div class="container">
+    <div class="main">
+        <ul class="nav nav-tabs">
+            <li class="active col-md-6">
+                <a data-toggle="tab" id="jobsearch" class="btn tab-active  col-md-12" href="#jobs">Jobs Search</a>
+            </li>
+            <li class=" col-md-6">
+                <a data-toggle="tab" id="freelancersearch" class="btn  col-md-12" href="#freelancers">Freelancers near me</a>
+            </li>
+        </ul>
+        <br /><br />
+        <div class="tab-content">
+            <div id="jobs" class="tab-pane fade in active show">
+                <div class="row">
+                    <div class="col-md-3">
+                        <span>Job Title</span><input type="text" id="searchTitle" value="@ViewBag.SearchTitle" name="searchRole" class="form-control" placeholder="eg. Mobile app" />
+                    </div>
+                    <div class="col-md-3">
+                        <span>Location</span><input type="text" id="searchLocation" value="@ViewBag.SearchLocation" name="searchLocation" class="form-control" placeholder="eg. Sheffield" />
+                    </div>
+                    <div class="col-md-3">
+                        <span>Category</span>
+                        @Html.DropDownList("searchCategory", (IEnumerable<SelectListItem>)ViewBag.Category, (string)ViewBag.SearchCategory ,new { @class = "form-control"})
+                    </div>
+                    <div class="col-md-3">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="button" class="btn theme-color form-control" value="search" onclick="search()" />
+                            </div>
+                            <div class="col-md-6">
+                                <input type="button" class="btn theme-color form-control" value="Clear" onclick="clearSearch()" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="job-list">
+                    <div id="search-result">
+                    </div>
+                </div>
+            </div>
+            <div id="freelancers" class="tab-pane fade in active">
+                @Html.Partial("~/Views/Freelancer/FreelancersMapView.cshtml")
+            </div>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        search();
+    });
+</script>
+
+<script src="~/js/jobs.js"></script>
+
+
+

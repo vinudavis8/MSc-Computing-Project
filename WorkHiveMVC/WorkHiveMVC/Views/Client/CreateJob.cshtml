@@ -1,0 +1,90 @@
+﻿@model Models.ViewModel.JobRequest
+
+@{
+    ViewData["Title"] = "CreateJob";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/js/jobs.js"></script>
+<br />
+<h4 class="text-center"> Create Job</h4>
+<hr />
+<br />
+<br />
+
+<form id="formCreateJob" asp-action="SaveJob">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">Category</label>
+                @Html.DropDownList("CategoryId", (IEnumerable<SelectListItem>)ViewBag.Category, "Select category",new { @class = "form-control"})
+                <span id="errorCategory" style="display:none" class="text-danger">Please select category</span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">
+                </label>
+                <input asp-for="Title" class="form-control validate" data-rules="required" data-messages="Please enter a title" />
+                <span id="errorTitle" style="display:none" class="text-danger">Please enter title</span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+                <span id="errorDescription" style="display:none" class="text-danger">Please enter description</span>
+
+            </div>
+
+        </div>
+        <div class="col-md-4">
+
+
+            <div class="form-group">
+                <label asp-for="SkillTags" class="control-label"></label>
+                <input asp-for="SkillTags" class="form-control" />
+                <span asp-validation-for="SkillTags" class="text-danger"></span>
+                <span id="errorSkillTags" style="display:none" class="text-danger">Please enter skill tags</span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="JobType" class="control-label"></label>
+                <input asp-for="JobType" class="form-control" />
+                <span asp-validation-for="JobType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Deadline" class="control-label"></label>
+                <input type="date" id="Deadline" name="Deadline" class=" form-control" placeholder="Days" />
+                <span id="errordeadline" style="display:none" class="text-danger">Please enter deadline</span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Budget" class="control-label"></label>
+                <input asp-for="Budget" class="form-control" />
+                <span id="errorBudget" style="display:none" class="text-danger">Please enter budget</span>
+
+            </div>
+
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <input type="submit" value="Create" class="btn btn-success col-md-12" />
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</form>
+
+
+
